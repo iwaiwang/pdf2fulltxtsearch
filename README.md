@@ -44,3 +44,8 @@ source .venv/bin/activate  （macos)
 pip install -r requirements.txt
 
 ```
+
+### 运行程序
+.venv/bin/python main.py  (macos)
+.venv/Scirpt/python main.py (windows)
+
