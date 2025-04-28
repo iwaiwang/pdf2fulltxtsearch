@@ -1,0 +1,15 @@
+{
+    "opensearch": {
+        "host": "https://localhost:9200",
+        "user": "admin",
+        "password": "123@QWE#asd",
+        "index_name": "medical_records"
+    },
+    "app_settings": {
+        "pdf_directory": "D:/Python_Projects/fulltextsearch/pdf2fulltxtsearch/pdf_files",
+        "scan_interval_seconds": 300
+    },
+    "database": {
+        "db_path": "indexed_files.db"
+    }
+}
