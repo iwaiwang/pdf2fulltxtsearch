@@ -16,4 +16,4 @@ __pycache__/
 *.log.*.7z
 *.log.*.rar
 .DS_Store
-.db
+*.db
