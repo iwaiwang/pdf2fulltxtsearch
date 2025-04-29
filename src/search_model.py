@@ -21,7 +21,7 @@ class SearchModel:
         self.患者名=""
         self.住院号=txt_list[0]
         self.文件类型=txt_list[1]
-        self.文件目录=path
+        self.文件目录=""
         self.文件名称=fname
 
     def toJSON(self):

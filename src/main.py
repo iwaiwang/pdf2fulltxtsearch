@@ -98,8 +98,9 @@ class PDFIndexerApp(tk.Tk):
         except queue.Empty:
             pass
         # 保存 after ID，以便在退出时取消
-        self._check_queue_after_id = self.after(100, self.check_queue)
-    def append_log(self, message):
+        self._check_queue_after_id = self.after(200, self.check_queue)
+    def append_log(self, message, max_lines=500):
+        """将日志消息追加到日志文本框，并限制最大行数"""
         try:
             self.log_text.config(state='normal')
             tag = 'normal'
@@ -108,6 +109,12 @@ class PDFIndexerApp(tk.Tk):
                 self.log_text.tag_configure('error', foreground='red')
             self.log_text.insert(tk.END, message + '\n', tag)
             self.log_text.see(tk.END)
+
+            # 使用行计数器代替 splitlines
+            current_lines = int(self.log_text.index('end-1c').split('.')[0])
+            if current_lines > max_lines:
+                self.log_text.delete('1.0', f"{current_lines - max_lines}.0")
+
             self.log_text.config(state='disabled')
         except tk.TclError:
             pass

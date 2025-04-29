@@ -25,6 +25,7 @@ class IndexedFileManager:
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS indexed_files (
                     file_path TEXT PRIMARY KEY,
+                    success BOOLEAN DEFAULT 0,
                     modification_time REAL, -- 文件最后修改时间戳 (浮点数)
                     indexed_time REAL -- 索引到 OpenSearch 的时间戳
                 )
@@ -84,7 +85,7 @@ class IndexedFileManager:
             if conn:
                 conn.close()
 
-    def mark_as_indexed(self, file_path, modification_time):
+    def mark_as_indexed(self, file_path, success,modification_time):
         """
         标记文件为已索引，存储其路径和修改时间戳。
         如果文件已存在，则更新其信息（用于重新索引后更新时间戳）。
@@ -100,8 +101,8 @@ class IndexedFileManager:
             indexed_time = os.path.getmtime(self.db_path) # 使用数据库文件的修改时间或当前时间
             # 使用 INSERT OR REPLACE 来处理插入或更新
             cursor.execute(
-                "INSERT OR REPLACE INTO indexed_files (file_path, modification_time, indexed_time) VALUES (?, ?, ?)",
-                (file_path, modification_time, time.time()) # 记录当前系统时间作为索引时间
+                "INSERT OR REPLACE INTO indexed_files (file_path, success,modification_time, indexed_time) VALUES (?, ?, ?, ?)",
+                (file_path, success,modification_time, time.time()) # 记录当前系统时间作为索引时间
             )
             conn.commit()
             logger.info(f"Marked file as indexed: {file_path}")

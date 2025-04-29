@@ -67,9 +67,9 @@ class FileScanner:
 
                             # 简化的调用，假设 index_pdf 自己处理从文件名获取 info 或只需要 path
                             success = self.pdf_processor.index_pdf(pdf_path)
+                            # 标记文件为已索引
+                            self.db_manager.mark_as_indexed(pdf_path, success, modification_time)
                             if success:
-                                # 索引成功后，标记文件为已索引
-                                self.db_manager.mark_as_indexed(pdf_path, modification_time)
                                 processed_count += 1
                             else:
                                 logger.error(f"Failed to index file: {pdf_path}")

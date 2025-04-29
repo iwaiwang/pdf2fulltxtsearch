@@ -3,7 +3,7 @@ import json
 import os
 import logging
 
-CONFIG_FILE = "./config/es_config.json"
+CONFIG_FILE = "../config/es_config.json"
 DEFAULT_CONFIG = {
     "opensearch": {
         "host": "https://localhost:9200",
@@ -58,4 +58,5 @@ class SysConfig:
             # logger.info(f"Configuration saved to {CONFIG_FILE}")
         except Exception as e:
             logger.error(f"Error saving configuration to {CONFIG_FILE}: {e}")
- 
+   
+   
